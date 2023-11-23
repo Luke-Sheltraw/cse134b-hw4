@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luke Sheltraw's portfolio website">
+  <meta name="author" content="Luke Sheltraw">
+  <meta name="keywords" content="Luke Sheltraw, portfolio, resume">
+  <link rel="icon" href="assets/images/favicon.ico">
+  <link rel="stylesheet" href="styles/main.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="styles/email.css" media="screen" type="text/css">
+  <title>Skills | Luke Sheltraw</title>
+</head>
+<body>
+  <header class="header__wrapper">
+    <a href="#menu-open" aria-label="Open menu" title="Open menu" class="header__menuButton"></a>
+    <h1 class="header__logo">
+      <a href="index.html">
+        <img src="/assets/images/logo_icon.svg" alt="Mail logo" width="50" height="50">
+        LukeMail
+      </a>
+    </h1>
+    <div class="header__search">
+      <input
+        type="search"
+        placeholder="Search in mail" 
+        maxlength="150"
+        name="search"
+        id="search"
+        autocomplete="off"
+        aria-autocomplete="inline"
+        class="search__input"
+      >
+      <label for="search" aria-label="Search">
+        <img src="/assets/images/search_icon.svg" alt="Search icon" width="50" height="50">
+      </label>
+    </div>
+    <img
+      src="/assets/images/settings_icon.svg"
+      alt="Fake settings icon"
+      width="40"
+      height="40"
+      draggable="false"
+      class="header__icon"
+    >
+    <img
+      src="/assets/images/apps_menu_icon.svg"
+      alt="Fake menu icon"
+      width="40"
+      height="40"
+      draggable="false"
+      class="header__icon"
+    >
+    <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" class="header__icon">
+      <circle cx="20" cy="20" r="20" fill="#D9D9D9" />
+    </svg>
+  </header>
+  <div class="main__row">
+    <aside class="main__left" id="menu-open">
+      <a href="#" aria-label="Close menu" title="Close menu" class="header__menuButton" id="close-menu-button"></a>
+      <nav>
+        <ul class="nav__list">
+          <li><a href="contact.html" class="nav__contactButton gradient-bg">Contact me</a></li>
+          <li><a href="index.html">Inbox</a></li>
+          <li><a href="#">Starred</a></li>
+          <li><a href="#">Sent</a></li>
+          <li><a href="#">Drafts</a></li>
+          <li><a href="https://www.spam.com/recipes/spam-fries" target="_blank">Spam</a></li>
+          <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Trash</a></li>
+        </ul>
+      </nav>
+      <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" class="header__icon">
+        <circle cx="20" cy="20" r="20" fill="#D9D9D9" />
+      </svg>
+      <img
+        src="/assets/images/settings_icon.svg"
+        alt="Fake settings icon"
+        width="40"
+        height="40"
+        draggable="false"
+        class="header__icon"
+      >
+      <footer class="footer__wrapper">
+        <p class="footer__text">Handmade by Luke Sheltraw</p>
+      </footer>
+    </aside>
+    <main class="main__right">
+      <article aria-labelledby="email-title">
+        <div class="email__titleWrapper">
+          <a href="index.html" class="main__backLink" aria-label="Back"></a>
+          <h2 class="email__title" id="email-title">Skills</h2>
+        </div>
+        <section class="emailMetadata__wrapper">
+          <div class="emailMetadata__leftAlign">
+            <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="20" fill="#D9D9D9" />
+            </svg>
+            <div class="emailMetadata__fromInfoWrapper">
+              <address><b>Luke Sheltraw</b> <span>&lt;lukesheltraw&commat;gmail.com&gt;</span></address>
+              <p>to me
+                <time datetime="12:34" class="emailMetadata__timestamp emailMetadata__timestamp__smallScreen">12:34 (56 minutes ago)</time>
+              </p>
+            </div>
+          </div>
+          <time datetime="12:34" class="emailMetadata__timestamp emailMetadata__timestamp__largeScreen">12:34 (56 minutes ago)</time>
+        </section>
+        <section class="email__contents">
+          <p>Greetings!</p>
+          <p>
+            Over the last 10 years, I have dabbled in myriad programming languages and technologies. As such, this list is not exhaustive, and represents
+            only those I have worked with in the last year. (PHP didn't make the cut, but I do remember those days 🥹). 
+          </p>
+          <h3>Languages</h3>
+          <ul>
+            <li>Java</li>
+            <li>TypeScript</li>
+            <li>C++</li>
+            <li>Python</li>
+            <li>HTML, CSS</li>
+            <li>MATLAB 🙈</li>
+          </ul>
+          <h3>Libraries and frameworks</h3>
+          <ul>
+            <li>Spring Boot</li>
+            <li>React</li>
+            <li>Next.js</li>
+            <li>React Native</li>
+            <li>Fastify</li>
+            <li>Redux</li>
+            <li>Three.js</li>
+            <li>
+              Testing frameworks
+              <ul>
+                <li>JUnit</li>
+                <li>Mockito</li>
+                <li>Jest</li>
+                <li>Mocha</li>
+                <li>Puppeteer</li>
+                <li>Karate</li>
+                <li>Percy.io</li>
+              </ul>
+            </li>
+          </ul>
+          <h3>Technologies</h3>
+          <ul>
+            <li>Kubernetes</li>
+            <li>Docker</li>
+            <li>Jenkins</li>
+            <li>GitHub Actions</li>
+            <li>JMeter</li>
+            <li>Grafana</li>
+            <li>Prometheus</li>
+            <li>PostgreSQL, MySQL</li>
+            <li>Serverless computing (e.g. Netlify, AWS Lambda)</li>
+          </ul>
+          <h3>Miscellaneous</h3>
+          <ul>
+            <li>Agile processes</li>
+          </ul>
+          <p>I love learning new things, and am looking to expand this list in the near future 😄</p>
+          <p>Au revoir,<br>Luke Sheltraw</p>
+        </section>
+      </article>
+      <a href="contact.html" class="email__replyLink gradient-bg">Reply</a>
+    </main>
+  </div>
+</body>
+</html>

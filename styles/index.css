@@ -1,0 +1,89 @@
+@import url(tokens.css);
+
+/* Email List */
+.emailList__wrapper {
+  border-radius: 1rem;
+  border-spacing: 0;
+  box-shadow: var(--layout-outset-shadow, none);
+  width: 100%;
+}
+
+.emailList__wrapper th:first-of-type {
+  border-top-left-radius: 1rem;
+}
+.emailList__wrapper th:last-of-type {
+  border-top-right-radius: 1rem;
+}
+.emailList__wrapper tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 1rem;
+}
+.emailList__wrapper tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 1rem;
+}
+
+.emailList__wrapper tr td:first-of-type,
+.emailList__wrapper tr th:first-of-type {
+  border-left: 1px solid var(--layout-border-color, gray);
+}
+
+.emailList__wrapper tr td:last-of-type,
+.emailList__wrapper tr th:last-of-type {
+  border-right: 1px solid var(--layout-border-color, gray);
+}
+
+.emailList__wrapper tr th {
+  border-top: 1px solid var(--layout-border-color, gray);
+}
+
+.emailList__wrapper tr td,
+.emailList__wrapper tr th {
+  border-bottom: 1px solid var(--layout-border-color, gray);
+}
+
+.emailList__header {
+  background-color: var(--layout-accent-color, lightgray);
+  text-align: left;
+}
+
+/* Individual Emails */
+.email__wrapper,
+.emailList__header {
+  transform: translate(0); /* workaround for known bug; Safari does not support position on <tr> */
+  position: relative;
+  height: var(--email-row-height, 2.25rem);
+}
+
+.email__wrapper:hover {
+  filter: brightness(0.95);
+}
+
+.email__wrapper__unread {
+  background-color: var(--unread-email-bg-color, white);
+}
+
+.email__wrapper__read {
+  background-color: var(--read-email-bg-color, lightgray);
+}
+
+.email__checkbox {
+  width: 2.5rem;
+  text-align: center;
+}
+
+.email__title {
+  font-weight: bold;
+}
+
+.email__title a {
+  text-decoration: none;
+  color: var(--layout-psuedo-black, black);
+}
+
+.email__title a::before {
+  content: "";
+  position: absolute;
+  left: 2rem;
+  top: -1px;
+  width: calc(100% - 2rem);
+  height: var(--email-row-height, 2.25rem);
+}

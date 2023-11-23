@@ -1,0 +1,139 @@
+/* Page layout */
+.email__contents {
+  margin: 1rem 0;
+  border: 1px solid var(--layout-border-color, gray);
+  box-shadow: var(--layout-outset-shadow, none);
+  border-radius: 10px;
+  padding: 1rem;
+  max-height: calc(100vh - 25.6rem);
+  overflow: hidden auto;
+}
+
+/* General Email Format */
+.email__replyLink {
+  text-decoration: none;
+  color: var(--layout-accent-contrast-text-color, black);
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--layout-accent-color, lightgray);
+  border: 1px solid var(--layout-border-color, gray);
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  box-shadow: var(--layout-outset-shadow, none);
+  transition: 150ms transform ease-in-out;
+}
+
+.email__replyLink::before {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.375rem;
+  background-image: url(../assets/images/reply_icon.svg);
+  background-size: cover;
+}
+
+.email__replyLink:hover {
+  filter: brightness(0.95);
+  transform: scale(1.05);
+}
+
+.email__title {
+  font-size: 2em;
+}
+
+/* Metadata */
+.emailMetadata__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.emailMetadata__leftAlign {
+  display: flex;
+}
+
+.emailMetadata__wrapper p {
+  margin: 0;
+}
+
+.emailMetadata__fromInfoWrapper {
+  margin-left: 1rem;
+}
+
+.emailMetadata__fromInfoWrapper address {
+  font-style: normal;
+}
+
+.emailMetadata__timestamp__smallScreen {
+  color: var(--layout-secondary-text-color, gray);
+  margin-left: 0.375rem;
+  display: none;
+}
+
+/* Email contents */
+@scope (.email__contents) {
+  h3 {
+    & time,
+    & span {
+      font-weight: normal;
+    }
+
+    &:has(+ .email__degreeName) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  li {
+    &:not(:last-child) {
+      margin-bottom: 0.2rem;
+    }
+
+    & > ul {
+      margin-top: 0.3rem;
+    }
+  }
+  
+  a {
+    color: var(--layout-accent-color, blue);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .email__degreeName {
+    margin-top: 0;
+    font-style: italic;
+  }
+
+  picture img {
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+/* Responsive Layout */
+@media screen and (max-width: 620px), (max-height: 500px) {
+  .email__contents {
+    max-height: calc(100vh - 21.5rem);
+  }
+
+  .email__titleWrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .email__title {
+    margin: 0 1.25rem;
+  }
+
+  .emailMetadata__timestamp__smallScreen {
+    display: inline;
+  }
+
+  .emailMetadata__timestamp__largeScreen {
+    display: none;
+  }
+}

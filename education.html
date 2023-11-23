@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luke Sheltraw's portfolio website">
+  <meta name="author" content="Luke Sheltraw">
+  <meta name="keywords" content="Luke Sheltraw, portfolio, resume">
+  <link rel="icon" href="assets/images/favicon.ico">
+  <link rel="stylesheet" href="styles/main.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="styles/email.css" media="screen" type="text/css">
+  <title>Education | Luke Sheltraw</title>
+</head>
+<body>
+  <header class="header__wrapper">
+    <a href="#menu-open" aria-label="Open menu" title="Open menu" class="header__menuButton"></a>
+    <h1 class="header__logo">
+      <a href="index.html">
+        <img src="/assets/images/logo_icon.svg" alt="Mail logo" width="50" height="50">
+        LukeMail
+      </a>
+    </h1>
+    <div class="header__search">
+      <input
+        type="search"
+        placeholder="Search in mail" 
+        maxlength="150"
+        name="search"
+        id="search"
+        autocomplete="off"
+        aria-autocomplete="inline"
+        class="search__input"
+      >
+      <label for="search" aria-label="Search">
+        <img src="/assets/images/search_icon.svg" alt="Search icon" width="50" height="50">
+      </label>
+    </div>
+    <img
+      src="/assets/images/settings_icon.svg"
+      alt="Fake settings icon"
+      width="40"
+      height="40"
+      draggable="false"
+      class="header__icon"
+    >
+    <img
+      src="/assets/images/apps_menu_icon.svg"
+      alt="Fake menu icon"
+      width="40"
+      height="40"
+      draggable="false"
+      class="header__icon"
+    >
+    <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" class="header__icon">
+      <circle cx="20" cy="20" r="20" fill="#D9D9D9" />
+    </svg>
+  </header>
+  <div class="main__row">
+    <aside class="main__left" id="menu-open">
+      <a href="#" aria-label="Close menu" title="Close menu" class="header__menuButton" id="close-menu-button"></a>
+      <nav>
+        <ul class="nav__list">
+          <li><a href="contact.html" class="nav__contactButton gradient-bg">Contact me</a></li>
+          <li><a href="index.html">Inbox</a></li>
+          <li><a href="#">Starred</a></li>
+          <li><a href="#">Sent</a></li>
+          <li><a href="#">Drafts</a></li>
+          <li><a href="https://www.spam.com/recipes/spam-fries" target="_blank">Spam</a></li>
+          <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Trash</a></li>
+        </ul>
+      </nav>
+      <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" class="header__icon">
+        <circle cx="20" cy="20" r="20" fill="#D9D9D9" />
+      </svg>
+      <img
+        src="/assets/images/settings_icon.svg"
+        alt="Fake settings icon"
+        width="40"
+        height="40"
+        draggable="false"
+        class="header__icon"
+      >
+      <footer class="footer__wrapper">
+        <p class="footer__text">Handmade by Luke Sheltraw</p>
+      </footer>
+    </aside>
+    <main class="main__right">
+      <article aria-labelledby="email-title">
+        <div class="email__titleWrapper">
+          <a href="index.html" class="main__backLink" aria-label="Back"></a>
+          <h2 class="email__title" id="email-title">Education</h2>
+        </div>
+        <section class="emailMetadata__wrapper">
+          <div class="emailMetadata__leftAlign">
+            <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="20" fill="#D9D9D9" />
+            </svg>
+            <div class="emailMetadata__fromInfoWrapper">
+              <address><b>Luke Sheltraw</b> <span>&lt;lukesheltraw&commat;gmail.com&gt;</span></address>
+              <p>to me
+                <time datetime="12:34" class="emailMetadata__timestamp emailMetadata__timestamp__smallScreen">12:34 (56 minutes ago)</time>
+              </p>
+            </div>
+          </div>
+          <time datetime="12:34" class="emailMetadata__timestamp emailMetadata__timestamp__largeScreen">12:34 (56 minutes ago)</time>
+        </section>
+        <section class="email__contents">
+          <p>Hello,</p>
+          <p>
+            I am a third-year senior Math + CS major at UC San Diego. I am a tenacious learner passionate about the
+            intersections of math, computer science, and design. In my free time, I race bikes as the Vice-President of
+            the UCSD cycling team.
+          </p>
+          <h3>University of California, San Diego <time datetime="2021">(2021&ndash;2024)</time></h3>
+          <p class="email__degreeName">BS, Mathematics - Computer Science</p>
+          <ul>
+            <li>4.00 GPA</li>
+            <li>Select coursework
+              <ul>
+                <li>
+                  CSE 134B: <em>Web client languages</em>
+                </li>
+                <li>
+                  CSE 110: <em>Software engineering</em>
+                </li>
+                <li>
+                  CSE 100: <em>Data structures</em>
+                </li>
+                <li>
+                  CSE 101: <em>Algorithms</em>
+                </li>
+                <li>
+                  CSE 170: <em>Interaction design</em>
+                </li>
+                <li>
+                  CSE 30: <em>Systems programming</em>
+                </li>
+                <li>
+                  CSE 105: <em>Computation theory</em>
+                </li>
+                <li>
+                  MATH 102: <em>Applied linear algebra</em>
+                </li>
+                <li>
+                  MATH 154: <em>Graph theory</em>
+                </li>
+                <li>
+                  MATH 184: <em>Enumerative combinatorics</em>
+                </li>
+                <li>
+                  MATH 103A, B: <em>Abstract algebra</em>
+                </li>
+                <li>
+                  MATH 170A: <em>Linear numerical analysis</em>
+                </li>
+                <li>
+                  MATH 180A: <em>Probability theory</em>
+                </li>
+                <li>
+                  DSGN 1: <em>Design of Everyday Things</em>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h3>Albany High School <time datetime="2017">(2017&ndash;2021)</time></h3>
+          <ul>
+            <li>4.00 unweighted GPA; 1570 SAT; National Merit Scholar</li>
+          </ul>
+          <p>Sincerely,<br>Luke Sheltraw</p>
+        </section>
+      </article>
+      <a href="contact.html" class="email__replyLink gradient-bg">Reply</a>
+    </main>
+  </div>
+</body>
+</html>
