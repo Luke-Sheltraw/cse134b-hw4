@@ -1,0 +1,88 @@
+#contact_wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(50rem - 40vw);
+  min-height: 30rem;
+  max-height: calc(100vh - 15rem);
+  margin-top: 1rem;
+}
+
+form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+form-field.very-large {
+  flex: 1;
+}
+
+form-field:not(:last-of-type) {
+  margin-bottom: 0.75rem;
+}
+
+form-field label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+form-field:has( :required) label::after {
+  content: " *";
+  color: #e00d0d;
+}
+
+form-field :is(input, textarea) {
+  border: 1px solid var(--layout-border-color, gray);
+  border-radius: 1rem;
+  font-size: 0.875rem;
+}
+
+form-field :is(input, textarea):user-invalid {
+  border: none;
+  outline: 2px solid #e00d0d;
+}
+
+form-field input {
+  padding: 0 0.75rem;
+  height: 2.25rem;
+}
+
+form-field textarea {
+  padding: 1rem;
+  flex: 1;
+  resize: none;
+  font-family: inherit;
+}
+
+.hw4__contactOutput {
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hw4__contactOutput__error {
+  color: #e00d0d;
+  opacity: 1;
+  transition: opacity 350ms ease-in-out;
+}
+
+.hw4__contactOutput__info {
+  color: var(--layout-secondary-text-color);
+}
+
+.no-opacity {
+  opacity: 0;
+}
+
+.no-visibility {
+  visibility: hidden;
+}
+
+:is(input, textarea) {
+  outline-color: var(--layout-accent-color);
+  transition: outline-color 350ms ease-in-out;
+}
+
+:is(input, textarea).invalid-accent {
+  accent-color: #e00d0d;
+  outline-color: #e00d0d;
+}

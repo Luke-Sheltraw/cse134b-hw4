@@ -9,7 +9,8 @@
   <link rel="icon" href="assets/images/favicon.ico">
   <link rel="stylesheet" href="styles/main.css" media="screen" type="text/css">
   <link rel="stylesheet" href="styles/compose.css" media="screen" type="text/css">
-  <title>Compose | Luke Sheltraw</title>
+  <link rel="stylesheet" href="styles/hw4.css" media="screen" type="text/css">
+  <title>HW 4 Contact | Luke Sheltraw</title>
 </head>
 <body>
   <header class="header__wrapper">
@@ -86,52 +87,58 @@
     </aside>
     <main class="main__right">
       <a href="index.html" class="main__backLink" aria-label="Back"></a>
-      <form method="POST" action="https://httpbin.org/post" class="contact__wrapper">
-        <div class="contact__fwInputWrapper">
-          <label for="fromaddress">From</label>
-          <input
-            type="email"
-            placeholder="youraddress@mail.com"
-            title="Enter your email address"
-            id="fromaddress"
-            name="fromaddress"
-            autocomplete="off"
-            aria-autocomplete="inline"
-            required
-          >
-        </div>
-        
-        <div class="contact__fwInputWrapper">
-          <label for="toaddress">To</label>
-          <input
-            type="email"
-            value="lukesheltraw@gmail.com"
-            title="Luke's email address"
-            id="toaddress"
-            name="toaddress"
-            disabled
-            required
-          >
-        </div>
-  
-        <div class="contact__fwInputWrapper">
-          <label for="subject">Subject</label>
+      <form method="POST" action="https://httpbin.org/post" id="contact_wrapper">
+        <form-field>
+          <label for="sender_name">Name</label>
           <input
             type="text"
-            title="Enter a subject line"
-            id="subject"
-            name="subject"
-            required autocomplete="off"
+            placeholder="First Last"
+            title="Enter your name"
+            id="sender_name"
+            name="sender_name"
+            autocomplete="off"
             aria-autocomplete="inline"
+            minlength="2"
+            required
           >
-        </div>
+          <div class="hw4__contactOutput">
+            <output class="hw4__contactOutput__error">Please enter a valid name</output>
+            <output class="hw4__contactOutput__info">This is an example info message</output>
+          </div>
+        </form-field>
+        
+        <form-field>
+          <label for="sender_address">Email</label>
+          <input
+            type="email"
+            placeholder="address@email.com"
+            title="Enter your email address"
+            id="sender_address"
+            name="sender_address"
+            required
+          >
+          <div class="hw4__contactOutput">
+            <output class="hw4__contactOutput__error">Please enter a valid email address</output>
+            <output class="hw4__contactOutput__info">This is an example info message</output>
+          </div>
+        </form-field>
   
-        <textarea 
-          name="body"
-          title="Enter email body content"
-          class="contact__bodyInput"
-          required
-        ></textarea>
+        <form-field class="very-large">
+          <label for="sender_comments">Comments</label>
+          <textarea 
+            name="sender_comments"
+            id="sender_comments"
+            title="Enter your comments"
+            maxlength="1250"
+            minlength="3"
+            pattern="^[A-Za-z0-9\s\.,!?'&quot;()]*$"
+            required
+          ></textarea>
+          <div class="hw4__contactOutput">
+            <output class="hw4__contactOutput__error">Please use valid characters to enter a comment</output>
+            <output class="hw4__contactOutput__info">This is an example info message</output>
+          </div>
+        </form-field>
 
         <div class="contact__actions">
           <button class="contact__sendButton gradient-bg">Send</button>
