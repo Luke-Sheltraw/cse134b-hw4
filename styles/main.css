@@ -240,6 +240,7 @@ input,
 textarea {
   accent-color: var(--layout-accent-color, blue);
   box-shadow: var(--layout-inset-shadow, none);
+  color: inherit;
 }
 
 input::placeholder,

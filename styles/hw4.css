@@ -52,7 +52,6 @@ form-field :is(input, textarea) {
   border: 1px solid var(--layout-border-color, gray);
   border-radius: 1rem;
   font-size: 0.875rem;
-  color: inherit;
   background-color: var(--layout-box-bg-color, white);
 }
 
@@ -105,6 +104,7 @@ form-field textarea {
 :is(input, textarea).invalid-accent {
   accent-color: var(--layout-error-color, red);
   outline-color: var(--layout-error-color, red);
+  border-color: var(--layout-error-color, red);
 }
 
 #theme-switcher {
