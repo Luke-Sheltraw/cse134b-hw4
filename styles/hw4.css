@@ -1,3 +1,21 @@
+:root:has(#theme-switcher:checked) {
+  --layout-accent-color: #ff6d91;
+  --layout-border-color: #ff6d91;
+  --layout-text-color: white;
+  --layout-bg-color: #1b1b1b;
+  --layout-box-bg-color: #4e4e4e;
+  --layout-secondary-text-color: color(srgb-linear 0.4 0.4 0.4);
+  --layout-text-underline-color: color-mix(in hsl, var(--layout-accent-color), rgb(0, 255, 255));;
+  --layout-accent-contrast-text-color: white;
+  --layout-error-color: #F44336;
+
+  --layout-outset-shadow: 0 0 5px 1px #efefef38;
+  --layout-inset-shadow: inset 0 0 3px 1px #efefef1d;
+
+  --unread-email-bg-color: white;
+  --read-email-bg-color: #e2e9f0;
+}
+
 #contact_wrapper {
   display: flex;
   flex-direction: column;
@@ -27,18 +45,20 @@ form-field label {
 
 form-field:has( :required) label::after {
   content: " *";
-  color: #e00d0d;
+  color: var(--layout-error-color, red);
 }
 
 form-field :is(input, textarea) {
   border: 1px solid var(--layout-border-color, gray);
   border-radius: 1rem;
   font-size: 0.875rem;
+  color: inherit;
+  background-color: var(--layout-box-bg-color, white);
 }
 
 form-field :is(input, textarea):user-invalid {
   border: none;
-  outline: 2px solid #e00d0d;
+  outline: 2px solid var(--layout-error-color, red);
 }
 
 form-field input {
@@ -60,7 +80,7 @@ form-field textarea {
 }
 
 .hw4__contactOutput__error {
-  color: #e00d0d;
+  color: var(--layout-error-color, red);
   opacity: 1;
   transition: opacity 350ms ease-in-out;
 }
@@ -83,6 +103,39 @@ form-field textarea {
 }
 
 :is(input, textarea).invalid-accent {
-  accent-color: #e00d0d;
-  outline-color: #e00d0d;
+  accent-color: var(--layout-error-color, red);
+  outline-color: var(--layout-error-color, red);
+}
+
+#theme-switcher {
+  width: 4rem;
+  height: 2.25rem;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 1px solid var(--layout-border-color, gray);
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: var(--layout-box-bg-color, white);
+}
+
+#theme-switcher::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--layout-accent-color, blue);
+  position: absolute;
+  left: 0.25rem;
+  box-shadow: var(--layout-outset-shadow);
+  transform: translateX(0);
+  transition: transform 150ms ease-in-out;
+}
+
+#theme-switcher:checked::before {
+  transform: translateX(calc(2rem - 2px));
 }

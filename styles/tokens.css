@@ -2,13 +2,16 @@
 :root {
   --layout-accent-color: #1F8AFF;
   --layout-border-color: #bbbec2;
-  --layout-psuedo-black: #213442;
+  --layout-text-color: #213442;
+  --layout-bg-color: white;
+  --layout-box-bg-color: white;
   --layout-secondary-text-color: color(srgb-linear 0.4 0.4 0.4);
   --layout-text-underline-color: color-mix(in hsl, var(--layout-accent-color), rgb(0, 255, 255));
   --layout-accent-contrast-text-color: white;
+  --layout-error-color: #F44336;
 
   --layout-outset-shadow: 0 0 5px 1px #efefef;
-  --layout-inset-shadow: inset 0 0 3px 1px #efefef70;
+  --layout-inset-shadow: inset 0 0 3px 1px #eaeaeaab;
 
   --unread-email-bg-color: white;
   --read-email-bg-color: #e2e9f0;

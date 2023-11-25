@@ -76,7 +76,7 @@
 
 .email__title a {
   text-decoration: none;
-  color: var(--layout-psuedo-black, black);
+  color: var(--layout-text-color, black);
 }
 
 .email__title a::before {

@@ -21,10 +21,11 @@
 body {
   padding: 0 1rem;
   overflow: hidden;
-  color: var(--layout-psuedo-black, black);
+  color: var(--layout-text-color, black);
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-size: 0.875rem;
   transition: 150ms padding ease-in-out;
+  background-color: var(--layout-bg-color, white);
 }
 
 /* Main Layout */
@@ -60,10 +61,15 @@ body {
   transform: translate(-50%, -50%);
   width: 2.175rem;
   height: 2.175rem;
-  background-image: url(../assets/images/arrow_back_icon.svg);
-  background-size: 2rem 2rem;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: var(--layout-text-color);
+  -webkit-mask: url(../assets/images/arrow_back_icon.svg);
+  -webkit-mask-size: 2rem 2rem;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask: url(../assets/images/arrow_back_icon.svg);
+  mask-size: 2rem 2rem;
+  mask-position: center;
+  mask-repeat: no-repeat;
 }
 
 .main__backLink:hover {
@@ -84,7 +90,7 @@ body {
 }
 
 .main__backLink:hover::before {
-  filter: brightness(0) invert(1);
+  background-color: var(--layout-accent-contrast-text-color);
 }
 
 /* Header */
@@ -132,13 +138,18 @@ body {
   font-size: 0.875rem;
   border: 1px solid var(--layout-border-color, gray);
   border-radius: 1rem;
+  background-color: var(--layout-box-bg-color, white);
 }
 
-.header__logo img {
+.header__logo img, .header__logo svg {
   height: 2.5rem;
   width: auto;
   margin-right: 0.2rem;
   margin-bottom: -0.1rem;
+}
+
+.header__logo svg {
+  fill: var(--layout-accent-color);
 }
 
 .header__logo {
@@ -149,7 +160,7 @@ body {
 }
 
 .header__logo a {
-  color: var(--layout-psuedo-black, black);
+  color: var(--layout-text-color, black);
   text-decoration: none;
   display: inline-flex;
   align-items: flex-end;
@@ -159,6 +170,7 @@ body {
   width: 2.5rem;
   height: auto;
   margin-left: 1rem;
+  fill: var(--layout-text-color, black);
 }
 
 /* Nav */
@@ -179,7 +191,7 @@ body {
 .nav__list a {
   text-decoration-color: var(--layout-text-underline-color, gray);
   text-decoration-line: none;
-  color: var(--layout-psuedo-black, black);
+  color: var(--layout-text-color, black);
 }
 
 .nav__list a:hover {
@@ -230,9 +242,14 @@ textarea {
   box-shadow: var(--layout-inset-shadow, none);
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: var(--layout-secondary-text-color, gray);
+}
+
 input:focus,
 textarea:focus {
-  outline-color: var(--layout-accent-color, blue);
+  outline: 2px solid var(--layout-accent-color, blue);
 }
 
 input[disabled] {
@@ -336,7 +353,7 @@ input[disabled] {
     top: 0;
     left: 0;
     z-index: 1;
-    background-color: white;
+    background-color: var(--layout-bg-color);
     width: 0;
     padding: 0.5rem 0;
     border-right: 1px solid var(--layout-border-color, gray);

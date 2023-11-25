@@ -99,6 +99,7 @@
             autocomplete="off"
             aria-autocomplete="inline"
             minlength="2"
+            maxlength="100"
             required
           >
           <div class="hw4__contactOutput">
@@ -115,6 +116,7 @@
             title="Enter your email address"
             id="sender_address"
             name="sender_address"
+            maxlength="100"
             required
           >
           <div class="hw4__contactOutput">
@@ -131,7 +133,7 @@
             title="Enter your comments"
             maxlength="1250"
             minlength="3"
-            pattern="^[A-Za-z0-9\s\.,!?'&quot;()]*$"
+            pattern="^[-A-Za-z0-9\s\.,!?'&quot;:\–\—()$%&]*$"
             required
           ></textarea>
           <div class="hw4__contactOutput">
