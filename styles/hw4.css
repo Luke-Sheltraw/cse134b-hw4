@@ -110,7 +110,7 @@ form-field textarea {
 #theme-switcher {
   width: 4rem;
   height: 2.25rem;
-  margin: 0;
+  margin: 0 0 0 1rem;
   -webkit-appearance: none;
   appearance: none;
   display: flex;
@@ -130,12 +130,12 @@ form-field textarea {
   border-radius: 50%;
   background-color: var(--layout-accent-color, blue);
   position: absolute;
-  left: 0.25rem;
+  left: calc(0.25rem + 1px);
   box-shadow: var(--layout-outset-shadow);
   transform: translateX(0);
   transition: transform 150ms ease-in-out;
 }
 
 #theme-switcher:checked::before {
-  transform: translateX(calc(2rem - 2px));
+  transform: translateX(calc(2rem - 4px));
 }
