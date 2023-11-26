@@ -26,6 +26,7 @@ body {
   font-size: 0.875rem;
   transition: 150ms padding ease-in-out;
   background-color: var(--layout-bg-color, white);
+  transition: background-color 150ms ease-in-out;
 }
 
 /* Main Layout */
@@ -139,6 +140,7 @@ body {
   border: 1px solid var(--layout-border-color, gray);
   border-radius: 1rem;
   background-color: var(--layout-box-bg-color, white);
+  transition: background-color 150ms ease-in-out;
 }
 
 .header__logo img, .header__logo svg {
@@ -171,6 +173,10 @@ body {
   height: auto;
   margin-left: 1rem;
   fill: var(--layout-text-color, black);
+}
+
+.header__icon.header__icon__pfp {
+  fill: var(--layout-secondary-text-color, gray);
 }
 
 /* Nav */
