@@ -2,18 +2,52 @@ const REGEX_PATTERN_BY_NAME = {
   'sender_name': /^[A-Za-z'-\s]*$/,
   'sender_address': /^[A-Za-z0-9_\.@]*$/,
   'sender_comments': /^[-A-Za-z0-9\s\.,!?'";:\–\—()$%&]*$/,
-};
+}
+
+const DESCRIPTOR_BY_NAME = {
+  'sender_name': 'a name',
+  'sender_address': 'an email address',
+  'sender_comments': 'a comment',
+}
 
 const form_errors = [];
 const lastValidInputByName = {};
 
-function validateInputFieldOnChange(e) {
-  const inputFieldEl = e.target;
-  const inputFieldWrapperEl = inputFieldEl.parentNode;
-
-  if (!inputFieldEl.checkValidity()) {
-    inputFieldEl.setCustomValidity(''); // TODO: finish this
+function convertValidityStateToListOfInvalids(validityState) {
+  const invalidChecks = [];
+  for (const key in validityState) {
+    if (key === 'customError' || key === 'valid') continue;
+    if (validityState[key]) invalidChecks.push(key);
   }
+  return invalidChecks.join(', ');
+}
+
+function validateInputFieldOnEvent(e) {
+  const inputFieldEl = e.target;
+  const targetDescriptor = DESCRIPTOR_BY_NAME[inputFieldEl.name];
+
+  if (inputFieldEl.validity.tooLong) {
+    inputFieldEl.setCustomValidity(`That's a lot of writing! Usually ${ targetDescriptor } isn't that long.`);
+  } else if (inputFieldEl.validity.tooShort) {
+    inputFieldEl.setCustomValidity(`I think ${ targetDescriptor } is a bit longer than that.`);
+  } else if (inputFieldEl.validity.typeMismatch || inputFieldEl.validity.patternMismatch || inputFieldEl.validity.badInput) {
+    inputFieldEl.setCustomValidity(`That doesn't look like ${ targetDescriptor } to me...`);
+  } else if (inputFieldEl.validity.valueMissing) {
+    inputFieldEl.setCustomValidity(`Um, I sort of need ${ targetDescriptor } from you.`);
+  } else {
+    inputFieldEl.setCustomValidity('');
+  }
+
+  if (inputFieldEl.validationMessage !== '') {
+    form_errors.push({
+      error_type: convertValidityStateToListOfInvalids(inputFieldEl.validity),
+      input_field: inputFieldEl.name,
+      last_input: inputFieldEl.value,
+      timestamp: new Date().toISOString(),
+    });
+  }
+
+  inputFieldEl.reportValidity();
 }
 
 function maskInputFieldOnEvent(e) {
@@ -75,18 +109,20 @@ function attachValidationErrorsOnSubmit(e) {
 
   formData.append('form_errors', JSON.stringify(form_errors));
 
+  e.target.classList.add('filled-out');
+
   fetch('https://httpbin.org/post', {
     method: 'POST',
     body: formData,
-  }).then(console.log);
+  });
 }
 
 function initializeFieldValidation() {
   const inputFieldWrapperEls = document.querySelectorAll('form-field');
-  const formEl = document.querySelector('#contact_wrapper');
+  const formEl = document.querySelector('#contact-wrapper');
 
   inputFieldWrapperEls.forEach((inputFieldWrapperEl) => {
-    inputFieldWrapperEl.addEventListener('change', validateInputFieldOnChange);
+    inputFieldWrapperEl.addEventListener('change', validateInputFieldOnEvent);
     inputFieldWrapperEl.addEventListener('input', maskInputFieldOnEvent);
     inputFieldWrapperEl.addEventListener('focusout', maskInputFieldOnEvent);
   });

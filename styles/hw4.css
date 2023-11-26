@@ -18,13 +18,25 @@
   --font-family: Roboto;
 }
 
-#contact_wrapper {
+#contact-wrapper {
   display: flex;
   flex-direction: column;
   height: calc(50rem - 40vw);
   min-height: 30rem;
   max-height: calc(100vh - 15rem);
   margin-top: 1rem;
+}
+
+#contact-wrapper.filled-out {
+  display: none;
+}
+
+#contact-wrapper + #thank-you-message {
+  display: none;
+}
+
+#contact-wrapper.filled-out + #thank-you-message {
+  display: block;
 }
 
 form-field {
@@ -178,7 +190,7 @@ form-field textarea {
   --width: 3rem;
 
   content: "";
-  background-image: linear-gradient(180deg, var(--layout-box-bg-color) 65%, var(--layout-bg-color) 100%);
+  background-image: linear-gradient(180deg, var(--layout-box-bg-color, white) 65%, var(--layout-bg-color, white) 100%);
   display: block;
   height: var(--height);
   width: var(--width);
@@ -244,7 +256,7 @@ color-input input {
 
 #custom-theme-wrapper::before {
   content: "";
-  background-color: var(--layout-accent-color);
+  background-color: var(--layout-accent-color, blue);
   height: 2px;
   width: 100%;
   position: absolute;
@@ -277,4 +289,8 @@ color-input input {
 
 .hidden {
   display: none;
+}
+
+.accent-color {
+  color: var(--layout-accent-color, blue);
 }

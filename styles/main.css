@@ -243,6 +243,13 @@ select {
   color: inherit;
 }
 
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
 .single-line-input {
   height: 2.25rem;
   padding: 0 0.75rem;
