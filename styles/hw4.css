@@ -14,6 +14,8 @@
 
   --unread-email-bg-color: white;
   --read-email-bg-color: #e2e9f0;
+
+  --font-family: Roboto;
 }
 
 #contact_wrapper {
@@ -271,4 +273,8 @@ color-input input {
 .custom-theme-input input,
 .custom-theme-input select {
   margin: 0.75rem 0.5rem 0 0.5rem;
+}
+
+.hidden {
+  display: none;
 }
