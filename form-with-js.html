@@ -34,7 +34,7 @@
         id="search"
         autocomplete="off"
         aria-autocomplete="inline"
-        class="search__input"
+        class="search__input single-line-input"
       >
       <label for="search" aria-label="Search">
         <img src="/assets/images/search_icon.svg" alt="Search icon" width="50" height="50">
@@ -45,9 +45,54 @@
       <button id="settings-button" aria-label="Settings menu" class="header__icon"></button>
       <dialog id="settings-menu">
         <h2>Settings</h2>
-        <input type="color">
-        <input type="color">
-        <input type="color">
+
+        <div id="active-theme-wrapper">
+          <label for="active-theme">Active theme</label>
+          <select id="active-theme" class="single-line-input">
+            <optgroup label="System">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </optgroup>
+            <optgroup label="User-defined">
+              <option>Create new</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div id="custom-theme-wrapper"> 
+          <div id="custom-theme-name-wrapper" class="custom-theme-input">
+            <label for="custom-theme-name">Theme name</label>
+            <input type="text" id="custom-theme-name" value="Untitled theme 1" class="single-line-input">
+          </div>
+  
+          <color-input class="custom-theme-input">
+            <label for="bg-color">Background color</label>
+            <input id="bg-color" type="color" class="single-line-input">
+          </color-input>
+  
+          <color-input class="custom-theme-input">
+            <label for="accent-color">Accent color</label>
+            <input id="accent-color" type="color" class="single-line-input">
+          </color-input>
+  
+          <color-input class="custom-theme-input">
+            <label for="text-color">Text color</label>
+            <input id="text-color" type="color" class="single-line-input">
+          </color-input>
+          
+          <div id="font-family-wrapper" class="custom-theme-input">
+            <label for="font-family">Font family</label>
+            <select id="font-family" class="single-line-input">
+              <option value="Roboto">Roboto</option>
+              <option value="Helvetica">Helvetica</option>
+              <option value="Arial">Arial</option>
+              <option value="monospace">Monospace</option>
+              <option value="serif">Serif</option>
+              <option value="cursive">Cursive</option>
+              <option value="fantasy">Fantasy</option>
+            </select>
+          </div>
+        </div>
       </dialog>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 -960 960 960" width="40" class="header__icon">
@@ -101,6 +146,7 @@
             aria-autocomplete="inline"
             minlength="2"
             maxlength="100"
+            class="single-line-input"
             required
           >
           <div class="hw4__contactOutput">
@@ -118,6 +164,7 @@
             id="sender_address"
             name="sender_address"
             maxlength="100"
+            class="single-line-input"
             required
           >
           <div class="hw4__contactOutput">
