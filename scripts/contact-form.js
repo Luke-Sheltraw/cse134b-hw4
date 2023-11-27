@@ -115,6 +115,10 @@ function attachValidationErrorsOnSubmit(e) {
     method: 'POST',
     body: formData,
   });
+
+  const displayNameEl = document.querySelector('#display-name');
+  const nameInputEl = document.querySelector('#sender_name');
+  displayNameEl.innerText = nameInputEl.value;
 }
 
 function initializeFieldValidation() {
