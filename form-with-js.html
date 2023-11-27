@@ -140,13 +140,12 @@
             type="text"
             placeholder="First Last"
             title="Enter your name"
-            id="sender_name"
             name="sender_name"
-            autocomplete="off"
-            aria-autocomplete="inline"
+            id="sender_name"
+            class="single-line-input"
             minlength="2"
             maxlength="100"
-            class="single-line-input"
+            pattern="[A-Za-z'\s\-]*"
             required
           >
           <div class="hw4__contactOutput">
@@ -161,10 +160,12 @@
             type="email"
             placeholder="address@email.com"
             title="Enter your email address"
-            id="sender_address"
             name="sender_address"
-            maxlength="100"
+            id="sender_address"
             class="single-line-input"
+            minlength="5"
+            maxlength="100"
+            pattern="[\w\.@\-]*"
             required
           >
           <div class="hw4__contactOutput">
@@ -176,14 +177,14 @@
         <form-field class="very-large count-characters">
           <label for="sender_comments">Comments</label>
           <textarea 
+            title="Enter your comments"
             name="sender_comments"
             id="sender_comments"
-            title="Enter your comments"
-            maxlength="1250"
+            class="single-line-input"
             minlength="3"
-            pattern="^[-A-Za-z0-9\s\.,!?'&quot;:\–\—()$%&]*$"
+            maxlength="1250"
             required
-          ></textarea>
+            ></textarea>
           <div class="hw4__contactOutput">
             <output class="hw4__contactOutput__error no-visibility no-opacity">Please enter valid characters only</output>
             <output class="hw4__contactOutput__info"></output>

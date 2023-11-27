@@ -27,6 +27,11 @@
   margin-top: 1rem;
 }
 
+#contact-wrapper.no-js {
+  height: auto;
+  min-height: 0;
+}
+
 #contact-wrapper.filled-out {
   display: none;
 }

@@ -87,20 +87,19 @@
     </aside>
     <main class="main__right">
       <a href="index.html" class="main__backLink" aria-label="Back"></a>
-      <form method="POST" action="https://httpbin.org/post" id="contact-wrapper">
+      <form method="POST" action="https://httpbin.org/post" id="contact-wrapper" class="no-js">
         <form-field>
           <label for="sender_name">Name</label>
           <input
             type="text"
             placeholder="First Last"
             title="Enter your name"
-            id="sender_name"
             name="sender_name"
-            autocomplete="off"
-            aria-autocomplete="inline"
+            id="sender_name"
+            class="single-line-input"
             minlength="2"
             maxlength="100"
-            class="single-line-input"
+            pattern="[A-Za-z'\s\-]*"
             required
           >
           <div class="hw4__contactOutput">
@@ -115,10 +114,12 @@
             type="email"
             placeholder="address@email.com"
             title="Enter your email address"
-            id="sender_address"
             name="sender_address"
+            id="sender_address"
             class="single-line-input"
+            minlength="5"
             maxlength="100"
+            pattern="[\w\.@\-]*"
             required
           >
           <div class="hw4__contactOutput">
@@ -129,15 +130,17 @@
   
         <form-field class="very-large">
           <label for="sender_comments">Comments</label>
-          <textarea 
+          <input 
+            type="text"
+            title="Enter your comments"
             name="sender_comments"
             id="sender_comments"
-            title="Enter your comments"
-            maxlength="1250"
+            class="single-line-input"
             minlength="3"
-            pattern="^[-A-Za-z0-9\s\.,!?'&quot;:\–\—()$%&]*$"
+            maxlength="500"
+            pattern="[\w\s\.,!?'&quot;:\(\)\$%\&\-]*"
             required
-          ></textarea>
+          >
           <div class="hw4__contactOutput">
             <output class="hw4__contactOutput__error">Please use valid characters to enter a comment</output>
             <output class="hw4__contactOutput__info">This is an example info message</output>

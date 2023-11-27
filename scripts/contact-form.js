@@ -1,7 +1,7 @@
 const REGEX_PATTERN_BY_NAME = {
-  'sender_name': /^[A-Za-z'-\s]*$/,
-  'sender_address': /^[A-Za-z0-9_\.@]*$/,
-  'sender_comments': /^[-A-Za-z0-9\s\.,!?'";:\–\—()$%&]*$/,
+  'sender_name': /^[A-Za-z'\s\-]*$/,
+  'sender_address': /^[\w\.@\-]*$/,
+  'sender_comments': /^[\w\s\.,!?'&quot;:\(\)\$%\&\-]*$/,
 }
 
 const DESCRIPTOR_BY_NAME = {
