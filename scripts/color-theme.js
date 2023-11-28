@@ -148,19 +148,14 @@ function createNewTheme() {
 }
 
 function deleteCurrentCustomTheme() {
-  const currentUserThemes = JSON.parse(window.localStorage.getItem('user-themes')) ?? {};
+  const userThemes = JSON.parse(window.localStorage.getItem('user-themes')) ?? {};
   const currentThemeID = document.querySelector('#active-theme').value;
   const currentThemeOptionEl = document.querySelector(`option[value="${ currentThemeID }"]`);
 
   currentThemeOptionEl.remove();
+  delete userThemes[currentThemeID];
 
-  const themesWithoutCurrent = Object.fromEntries(Object.entries(
-    currentUserThemes
-  ).filter(([id,_]) => 
-    id !== currentThemeID
-  ));
-
-  window.localStorage.setItem('user-themes', JSON.stringify(themesWithoutCurrent));
+  window.localStorage.setItem('user-themes', JSON.stringify(userThemes));
 
   syncThemeToStorage('system');
   loadTheme('system');
@@ -187,10 +182,10 @@ function updateCustomThemeOnChange(e) {
 }
 
 function closeThemeSettingsMenuOnClickOutside(e) {
-  const settingsMenuEl = document.querySelector('dialog#settings-menu');
   const settingsWrapperEl = document.querySelector('#settings-wrapper');
-
   if (settingsWrapperEl.contains(e.target)) return;
+
+  const settingsMenuEl = document.querySelector('dialog#settings-menu');
 
   settingsMenuEl.removeAttribute('open');
 }
