@@ -158,7 +158,7 @@ form-field textarea {
 }
 
 #settings-button {
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
   -webkit-mask: url(../assets/images/settings_icon.svg);
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
