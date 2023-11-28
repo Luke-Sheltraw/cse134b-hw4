@@ -302,7 +302,7 @@ color-input input {
 
 #theme-discard-button {
   color: var(--layout-text-color, black);
-  margin: 0;
+  margin: 0.5rem 0;
   display: inline-flex;
   align-items: center;
   text-decoration-color: var(--layout-text-underline-color, gray);
