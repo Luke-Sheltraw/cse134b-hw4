@@ -1,7 +1,7 @@
 const REGEX_PATTERN_BY_NAME = {
   'sender_name': /^[A-Za-z'\s\-]*$/,
   'sender_address': /^[\w\.@\-]*$/,
-  'sender_comments': /^[\w\s\.,!?'&quot;:\(\)\$%\&\-]*$/,
+  'sender_comments': /^[\w\s\.,!?'";:\(\)\$%\&\-]*$/,
 }
 
 const DESCRIPTOR_BY_NAME = {
@@ -22,62 +22,91 @@ function convertValidityStateToListOfInvalids(validityState) {
   return invalidChecks.join(', ');
 }
 
+function displayErrorMessage(inputFieldWrapperEl, messageText) {
+  const inputFieldEl = inputFieldWrapperEl.querySelector('input, textarea');
+  const errorOutputEl = inputFieldWrapperEl.querySelector('.hw4__contactOutput__error');
+
+  errorOutputEl.innerText = messageText ?? 'Please enter a valid input';
+
+  inputFieldEl.classList.add('invalid-accent');
+  errorOutputEl.classList.remove('no-visibility');
+  errorOutputEl.classList.remove('no-opacity');
+}
+
+function clearErrorMessage(inputFieldWrapperEl) {
+  const inputFieldEl = inputFieldWrapperEl.querySelector('input, textarea');
+  const errorOutputEl = inputFieldWrapperEl.querySelector('.hw4__contactOutput__error');
+
+  inputFieldEl.classList.remove('invalid-accent');
+  if (!errorOutputEl.classList.contains('no-opacity')) {
+    errorOutputEl.classList.add('no-opacity');
+    errorOutputEl.addEventListener('transitionend', () => {
+      errorOutputEl.classList.add('no-visibility');
+    }, { once: true });
+  }
+}
+
 function validateInputFieldOnEvent(e) {
-  const inputFieldEl = e.target;
-  const targetDescriptor = DESCRIPTOR_BY_NAME[inputFieldEl.name];
+  validateInputField(e.currentTarget);
+}
+
+function validateInputField(inputFieldWrapperEl) {
+  const inputFieldEl = inputFieldWrapperEl.querySelector('input, textarea');
+  const targetDescriptor = DESCRIPTOR_BY_NAME[inputFieldEl.name] ?? 'a valid input';
+
+  inputFieldEl.setCustomValidity('');
+
+  if (inputFieldEl.checkValidity()) {
+    clearErrorMessage(inputFieldWrapperEl);
+    return true;
+  }
+
+  let errorMessageText = `Please enter ${ targetDescriptor }`;
 
   if (inputFieldEl.validity.tooLong) {
-    inputFieldEl.setCustomValidity(`That's a lot of writing! Usually ${ targetDescriptor } isn't that long.`);
+    errorMessageText = `That's a lot of writing! Usually ${ targetDescriptor } isn't that long`;
   } else if (inputFieldEl.validity.tooShort) {
-    inputFieldEl.setCustomValidity(`I think ${ targetDescriptor } is a bit longer than that.`);
+    errorMessageText = `I think ${ targetDescriptor } is a bit longer than that`;
   } else if (inputFieldEl.validity.typeMismatch || inputFieldEl.validity.patternMismatch || inputFieldEl.validity.badInput) {
-    inputFieldEl.setCustomValidity(`That doesn't look like ${ targetDescriptor } to me...`);
+    errorMessageText = `That doesn't look like ${ targetDescriptor } to me...`;
   } else if (inputFieldEl.validity.valueMissing) {
-    inputFieldEl.setCustomValidity(`Um, I sort of need ${ targetDescriptor } from you.`);
-  } else {
-    inputFieldEl.setCustomValidity('');
+    errorMessageText = `Um, I sort of need ${ targetDescriptor } from you`;
   }
 
-  if (inputFieldEl.validationMessage !== '') {
-    form_errors.push({
-      error_type: convertValidityStateToListOfInvalids(inputFieldEl.validity),
-      input_field: inputFieldEl.name,
-      last_input: inputFieldEl.value,
-      timestamp: new Date().toISOString(),
-    });
-  }
+  displayErrorMessage(inputFieldWrapperEl, errorMessageText);
 
-  inputFieldEl.reportValidity();
+  form_errors.push({
+    error_type: convertValidityStateToListOfInvalids(inputFieldEl.validity),
+    input_field: inputFieldEl.name,
+    last_input: inputFieldEl.value,
+    timestamp: new Date().toISOString(),
+  });
+
+  return false;
 }
 
 function maskInputFieldOnEvent(e) {
   const inputFieldEl = e.target;
-  const inputFieldWrapperEl = inputFieldEl.parentNode;
-  const errorOutputEl = inputFieldWrapperEl.querySelector('.hw4__contactOutput__error');
+  const inputFieldWrapperEl = e.currentTarget;
   
   const inputFieldName = inputFieldEl.name;
   const inputFieldRegex = REGEX_PATTERN_BY_NAME[inputFieldName];
 
   if (inputFieldEl.value.match(inputFieldRegex)) { /* valid input */
     lastValidInputByName[inputFieldName] = inputFieldEl.value;
-    inputFieldEl.classList.remove('invalid-accent');
-    if (!errorOutputEl.classList.contains('no-opacity')) {
-      errorOutputEl.classList.add('no-opacity');
-      errorOutputEl.addEventListener('transitionend', () => {
-        errorOutputEl.classList.add('no-visibility');
-      }, { once: true });
-    }
+
+    clearErrorMessage(inputFieldWrapperEl);
   } else { /* invalid input */
+    inputFieldEl.value = lastValidInputByName[inputFieldName] ?? '';
+
+    displayErrorMessage(inputFieldWrapperEl, 'Please enter valid characters only');
+
     form_errors.push({
       error_type: 'invalid characters',
       input_field: inputFieldName,
       last_input: inputFieldEl.value,
       timestamp: new Date().toISOString(),
     });
-    inputFieldEl.value = lastValidInputByName[inputFieldName] ?? '';
-    inputFieldEl.classList.add('invalid-accent');
-    errorOutputEl.classList.remove('no-visibility');
-    errorOutputEl.classList.remove('no-opacity');
   }
 
   if (inputFieldWrapperEl.classList.contains('count-characters'))
@@ -102,14 +131,24 @@ function updateCharacterCountForFormField(formFieldEl) {
   infoMsgEl.innerText = `${ inputFieldEl.value.length } / ${ inputFieldEl.maxLength >= 0 ? inputFieldEl.maxLength : '1250' }`;
 }
 
-function attachValidationErrorsOnSubmit(e) {
+function checkFormSubmissionOnAttemptedSubmit(e) {
   e.preventDefault();
 
+  const inputFieldWrapperEls = e.target.querySelectorAll('form-field');
+
+  if ([ ...inputFieldWrapperEls ].map((inputFieldWrapperEl) =>
+    validateInputField(inputFieldWrapperEl)
+  ).every((t) => t)) {
+    attachValidationErrorsOnSubmit(e);
+  }
+}
+
+function attachValidationErrorsOnSubmit(e) {
+  const submitButtonEl = e.target.querySelector('button');
+  submitButtonEl.disabled = true;
+
   const formData = new FormData(e.target);
-
   formData.append('form_errors', JSON.stringify(form_errors));
-
-  e.target.classList.add('filled-out');
 
   fetch('https://httpbin.org/post', {
     method: 'POST',
@@ -119,22 +158,28 @@ function attachValidationErrorsOnSubmit(e) {
   const displayNameEl = document.querySelector('#display-name');
   const nameInputEl = document.querySelector('#sender_name');
   displayNameEl.innerText = nameInputEl.value;
+  e.target.classList.add('filled-out');
 }
 
 function initializeFieldValidation() {
   const inputFieldWrapperEls = document.querySelectorAll('form-field');
-  const formEl = document.querySelector('#contact-wrapper');
-
+  
   inputFieldWrapperEls.forEach((inputFieldWrapperEl) => {
     inputFieldWrapperEl.addEventListener('change', validateInputFieldOnEvent);
     inputFieldWrapperEl.addEventListener('input', maskInputFieldOnEvent);
-    inputFieldWrapperEl.addEventListener('focusout', maskInputFieldOnEvent);
   });
+  
+}
 
-  formEl.addEventListener('submit', attachValidationErrorsOnSubmit);
+function initializeFormValidation() {
+  const formEl = document.querySelector('#contact-wrapper');
+  formEl.noValidate = true; // JS is running; disable default behavior
+
+  formEl.addEventListener('submit', checkFormSubmissionOnAttemptedSubmit);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   initializeCharacterCounts();
   initializeFieldValidation();
+  initializeFormValidation();
 }, { once: true });

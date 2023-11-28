@@ -51,6 +51,11 @@
   transition: 150ms transform ease-in-out;
 }
 
+.contact__sendButton:disabled {
+  pointer-events: none;
+  filter: grayscale(0.65);
+}
+
 .contact__sendButton::before {
   content: "";
   display: inline-block;

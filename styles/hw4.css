@@ -76,7 +76,6 @@ form-field textarea {
 }
 
 form-field :is(input, textarea):user-invalid {
-  border: none;
   outline: 2px solid var(--layout-error-color, red);
 }
 
@@ -119,7 +118,6 @@ form-field textarea {
 :is(input, textarea).invalid-accent {
   accent-color: var(--layout-error-color, red);
   outline-color: var(--layout-error-color, red);
-  border-color: var(--layout-error-color, red);
 }
 
 #theme-switcher {
