@@ -131,10 +131,7 @@ function initializeCharacterCounts() {
   const characterCountFormFieldEls = document.querySelectorAll('.count-characters');
 
   characterCountFormFieldEls.forEach((characterCountFormFieldEl) => {
-    const inputFieldEl = characterCountFormFieldEl.querySelector('input, textarea');
-    const infoMsgEl = characterCountFormFieldEl.querySelector('.hw4__contactOutput__info');
-
-    infoMsgEl.innerText = `0 / ${inputFieldEl.maxLength >= 0 ? inputFieldEl.maxLength : '1000'}`;
+    updateCharacterCountForFormField(characterCountFormFieldEl);
   });
 }
 
@@ -142,9 +139,21 @@ function updateCharacterCountForFormField(formFieldEl) {
   const inputFieldEl = formFieldEl.querySelector('input, textarea');
   const infoMsgEl = formFieldEl.querySelector('.hw4__contactOutput__info');
 
-  infoMsgEl.innerText = `${inputFieldEl.value.length} / ${
-    inputFieldEl.maxLength >= 0 ? inputFieldEl.maxLength : '1250'
-  }`;
+  const charCountMax = inputFieldEl.maxLength >= 0 ? inputFieldEl.maxLength : 1000;
+
+  infoMsgEl.innerText = `${ inputFieldEl.value.length } / ${ charCountMax }`;
+
+  const filledRatio = inputFieldEl.value.length / charCountMax;
+
+  if (filledRatio < 0.7) {
+    infoMsgEl.classList.remove('warning-char-count', 'error-char-count');
+  } else if (filledRatio < 1) {
+    infoMsgEl.classList.remove('error-char-count');
+    infoMsgEl.classList.add('warning-char-count');
+  } else {
+    infoMsgEl.classList.remove('warning-char-count');
+    infoMsgEl.classList.add('error-char-count');
+  }
 }
 
 function checkFormSubmissionOnAttemptedSubmit(e) {

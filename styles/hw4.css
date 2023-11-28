@@ -327,3 +327,11 @@ color-input input {
 #theme-discard-button:hover {
   text-decoration-line: underline;
 }
+
+.warning-char-count {
+  color: rgb(255, 221, 0);
+}
+
+.error-char-count {
+  color: var(--layout-error-color, red);
+}
