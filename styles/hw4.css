@@ -329,7 +329,7 @@ color-input input {
 }
 
 .warning-char-count {
-  color: rgb(255, 221, 0);
+  color: #ffdd00;
 }
 
 .error-char-count {
