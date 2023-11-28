@@ -6,9 +6,7 @@ function loadTheme(argThemeName) {
   const themeSwitcherToggleEl = document.querySelector('#theme-switcher');
   const activeThemeSelectEl = document.querySelector('#active-theme');
 
-  const themeName = argThemeName === 'system' 
-    ? getSystemTheme()
-    : argThemeName;
+  const themeName = argThemeName === 'system' ? getSystemTheme() : argThemeName;
 
   activeThemeSelectEl.value = argThemeName;
 
@@ -22,10 +20,11 @@ function loadTheme(argThemeName) {
     themeWrapperEl.classList.add('hidden');
     themeSwitcherToggleEl.indeterminate = false;
 
-    document.documentElement.style.removeProperty('--layout-bg-color');
-    document.documentElement.style.removeProperty('--layout-accent-color');
-    document.documentElement.style.removeProperty('--layout-text-color');
-    document.documentElement.style.removeProperty('--font-family');
+    ['layout-bg-color', 'layout-accent-color', 'layout-text-color', 'font-family'].forEach(
+      (attr) => {
+        document.documentElement.style.removeProperty(`--${attr}`);
+      }
+    );
   } else {
     themeWrapperEl.classList.remove('hidden');
     themeSwitcherToggleEl.indeterminate = true;
@@ -33,7 +32,7 @@ function loadTheme(argThemeName) {
 
     if (!themeObj) return console.warn('Problem loading user theme');
 
-    const activeThemeLabelEl = document.querySelector(`option[value="${ themeName }"]`);
+    const activeThemeLabelEl = document.querySelector(`option[value="${themeName}"]`);
     const themeNameEl = document.querySelector('#custom-theme-name');
     const bgColorEl = document.querySelector('#layout-bg-color');
     const accentColorEl = document.querySelector('#layout-accent-color');
@@ -46,18 +45,17 @@ function loadTheme(argThemeName) {
     accentColorEl.value = themeObj['layout-accent-color'];
     textColorEl.value = themeObj['layout-text-color'];
     fontFamilyEl.value = themeObj['font-family'];
-  
-    document.documentElement.style.setProperty('--layout-bg-color', themeObj['layout-bg-color']);
-    document.documentElement.style.setProperty('--layout-accent-color', themeObj['layout-accent-color']);
-    document.documentElement.style.setProperty('--layout-text-color', themeObj['layout-text-color']);
-    document.documentElement.style.setProperty('--font-family', themeObj['font-family']);
+
+    ['layout-bg-color', 'layout-accent-color', 'layout-text-color', 'font-family'].forEach(
+      (attr) => {
+        document.documentElement.style.setProperty(`--${attr}`, themeObj[attr]);
+      }
+    );
   }
 }
 
 function getSystemTheme() {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark' 
-    : 'light';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
 function syncThemeOnToggle(e) {
@@ -68,8 +66,7 @@ function syncThemeOnToggle(e) {
 }
 
 function syncThemeToStorage(themeName) {
-  if (themeName === 'system')
-    return window.localStorage.removeItem('current-theme');
+  if (themeName === 'system') return window.localStorage.removeItem('current-theme');
 
   window.localStorage.setItem('current-theme', themeName);
 }
@@ -91,11 +88,9 @@ function syncThemeFromStorage() {
 }
 
 function generateNewID() {
-  return Array.from(
-    { length: 10 }
-    ).map(() => 
-      FULL_ALPHABET[Math.floor(Math.random() * FULL_ALPHABET.length)]
-    ).join('');
+  return Array.from({ length: 10 })
+    .map(() => FULL_ALPHABET[Math.floor(Math.random() * FULL_ALPHABET.length)])
+    .join('');
 }
 
 function generateUniqueID(currentIDList) {
@@ -107,13 +102,9 @@ function generateUniqueID(currentIDList) {
 }
 
 function generateHexCode() {
-  return `#${ 
-    Array.from(
-    { length: 6 }
-    ).map(() => 
-      HEXCODE_ALPHABET[Math.floor(Math.random() * HEXCODE_ALPHABET.length)]
-    ).join('') 
-  }`;
+  return `#${Array.from({ length: 6 })
+    .map(() => HEXCODE_ALPHABET[Math.floor(Math.random() * HEXCODE_ALPHABET.length)])
+    .join('')}`;
 }
 
 function generateNewThemeObj() {
@@ -122,7 +113,7 @@ function generateNewThemeObj() {
     'layout-text-color': generateHexCode(),
     'layout-accent-color': generateHexCode(),
     'font-family': 'Roboto',
-  }
+  };
 }
 
 function createNewTheme() {
@@ -131,7 +122,7 @@ function createNewTheme() {
   const currentUserThemes = JSON.parse(window.localStorage.getItem('user-themes')) ?? {};
   const themeID = generateUniqueID(Object.keys(currentUserThemes));
 
-  const newTheme = { 
+  const newTheme = {
     ...generateNewThemeObj(),
     'custom-theme-name': 'Untitled theme',
   };
@@ -140,7 +131,7 @@ function createNewTheme() {
   newThemeOptionEl.value = themeID;
   newThemeOptionEl.innerText = newTheme['custom-theme-name'];
   createNewOptionEl.insertAdjacentElement('beforebegin', newThemeOptionEl);
-  
+
   currentUserThemes[themeID] = newTheme;
   window.localStorage.setItem('user-themes', JSON.stringify(currentUserThemes));
   syncThemeToStorage(themeID);
@@ -150,7 +141,7 @@ function createNewTheme() {
 function deleteCurrentCustomTheme() {
   const userThemes = JSON.parse(window.localStorage.getItem('user-themes')) ?? {};
   const currentThemeID = document.querySelector('#active-theme').value;
-  const currentThemeOptionEl = document.querySelector(`option[value="${ currentThemeID }"]`);
+  const currentThemeOptionEl = document.querySelector(`option[value="${currentThemeID}"]`);
 
   currentThemeOptionEl.remove();
   delete userThemes[currentThemeID];
@@ -209,7 +200,11 @@ function initializeColorThemeListeners() {
   discardCustomThemeButtonEl.addEventListener('click', deleteCurrentCustomTheme);
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  syncThemeFromStorage();
-  initializeColorThemeListeners();
-}, { once: true });
+window.addEventListener(
+  'DOMContentLoaded',
+  () => {
+    syncThemeFromStorage();
+    initializeColorThemeListeners();
+  },
+  { once: true }
+);
