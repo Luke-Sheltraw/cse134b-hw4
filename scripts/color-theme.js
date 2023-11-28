@@ -1,10 +1,5 @@
-const ALPHABET = 'abcdefghijklmnopqrstuvABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-const DEFAULT_NEW_THEME = {
-  'layout-bg-color': '#fffff5',
-  'layout-text-color': '#6a4e6a',
-  'layout-accent-color': '#0084ff',
-  'font-family': 'Roboto',
-}
+const FULL_ALPHABET = 'abcdefghijklmnopqrstuvABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+const HEXCODE_ALPHABET = 'abcdef0123456789';
 
 function loadTheme(themeName) {
   const themeWrapperEl = document.querySelector('#custom-theme-wrapper');
@@ -90,7 +85,7 @@ function generateNewID() {
   return Array.from(
     { length: 10 }
     ).map(() => 
-      ALPHABET[Math.floor(Math.random() * ALPHABET.length)]
+      FULL_ALPHABET[Math.floor(Math.random() * FULL_ALPHABET.length)]
     ).join('');
 }
 
@@ -102,6 +97,25 @@ function generateUniqueID(currentIDList) {
   return currentID;
 }
 
+function generateHexCode() {
+  return `#${ 
+    Array.from(
+    { length: 6 }
+    ).map(() => 
+      HEXCODE_ALPHABET[Math.floor(Math.random() * HEXCODE_ALPHABET.length)]
+    ).join('') 
+  }`;
+}
+
+function generateNewThemeObj() {
+  return {
+    'layout-bg-color': generateHexCode(),
+    'layout-text-color': generateHexCode(),
+    'layout-accent-color': generateHexCode(),
+    'font-family': 'Roboto',
+  }
+}
+
 function createNewTheme() {
   const createNewOptionEl = document.querySelector('#user-defined-themes option:last-of-type');
 
@@ -109,7 +123,7 @@ function createNewTheme() {
   const themeID = generateUniqueID(Object.keys(currentUserThemes));
 
   const newTheme = { 
-    ...DEFAULT_NEW_THEME,
+    ...generateNewThemeObj(),
     'custom-theme-name': 'Untitled theme',
   };
 
@@ -122,6 +136,25 @@ function createNewTheme() {
   window.localStorage.setItem('user-themes', JSON.stringify(currentUserThemes));
   syncThemeToStorage(themeID);
   loadTheme(themeID);
+}
+
+function deleteCurrentCustomTheme() {
+  const currentUserThemes = JSON.parse(window.localStorage.getItem('user-themes')) ?? {};
+  const currentThemeID = document.querySelector('#active-theme').value;
+  const currentThemeOptionEl = document.querySelector(`option[value="${ currentThemeID }"]`);
+
+  currentThemeOptionEl.remove();
+
+  const themesWithoutCurrent = Object.fromEntries(Object.entries(
+    currentUserThemes
+  ).filter(([id,_]) => 
+    id !== currentThemeID
+  ));
+
+  window.localStorage.setItem('user-themes', JSON.stringify(themesWithoutCurrent));
+
+  syncThemeToStorage('light');
+  loadTheme('light');
 }
 
 function syncCustomThemeFromDropdown() {
@@ -153,11 +186,13 @@ function initializeColorThemeListeners() {
   const themeSettingsBtnEl = document.querySelector('#settings-button');
   const themeSwitcherDropdownEl = document.querySelector('#active-theme');
   const themeInputsWrapperEl = document.querySelector('#custom-theme-wrapper');
+  const discardCustomThemeButtonEl = document.querySelector('#theme-discard-button');
 
   themeSwitcherToggleEl.addEventListener('change', syncThemeOnToggle);
   themeSettingsBtnEl.addEventListener('click', toggleThemeSettingsMenu);
   themeSwitcherDropdownEl.addEventListener('change', syncCustomThemeFromDropdown);
-  themeInputsWrapperEl.addEventListener('input', updateCustomThemeOnChange)
+  themeInputsWrapperEl.addEventListener('input', updateCustomThemeOnChange);
+  discardCustomThemeButtonEl.addEventListener('click', deleteCurrentCustomTheme);
 }
 
 window.addEventListener('DOMContentLoaded', () => {

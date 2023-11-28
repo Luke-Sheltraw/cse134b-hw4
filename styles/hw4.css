@@ -299,3 +299,33 @@ color-input input {
 .accent-color {
   color: var(--layout-accent-color, blue);
 }
+
+#theme-discard-button {
+  color: var(--layout-text-color, black);
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  text-decoration-color: var(--layout-text-underline-color, gray);
+  text-decoration-line: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+#theme-discard-button::before {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.375rem;
+  background-color: var(--layout-text-color);
+  -webkit-mask: url(../assets/images/discard_icon.svg);
+  -webkit-mask-size: cover;
+  mask: url(../assets/images/discard_icon.svg);
+  mask-size: cover;
+}
+
+#theme-discard-button:hover {
+  text-decoration-line: underline;
+}
