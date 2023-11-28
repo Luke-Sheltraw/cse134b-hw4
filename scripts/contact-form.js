@@ -100,14 +100,20 @@ function maskInputFieldOnEvent(e) {
   const inputFieldName = inputFieldEl.name;
   const inputFieldRegex = REGEX_PATTERN_BY_NAME[inputFieldName];
 
+  const clearCallbackFn = () => {
+    clearErrorMessage(inputFieldWrapperEl);
+  }
+
   if (inputFieldEl.value.match(inputFieldRegex)) {
     /* valid input */
     lastValidInputByName[inputFieldName] = inputFieldEl.value;
     clearErrorMessage(inputFieldWrapperEl);
+    inputFieldEl.removeEventListener('focusout', clearCallbackFn);
   } else {
     /* invalid input */
     inputFieldEl.value = lastValidInputByName[inputFieldName] ?? '';
     displayErrorMessage(inputFieldWrapperEl, 'Please enter valid characters only');
+    inputFieldEl.addEventListener('focusout', clearCallbackFn, { once: true }); 
 
     form_errors.push({
       error_type: 'invalid characters',
