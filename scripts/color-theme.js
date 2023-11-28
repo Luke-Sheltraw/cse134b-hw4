@@ -186,6 +186,15 @@ function updateCustomThemeOnChange(e) {
   loadTheme(currentThemeID);
 }
 
+function closeThemeSettingsMenuOnClickOutside(e) {
+  const settingsMenuEl = document.querySelector('dialog#settings-menu');
+  const settingsWrapperEl = document.querySelector('#settings-wrapper');
+
+  if (settingsWrapperEl.contains(e.target)) return;
+
+  settingsMenuEl.removeAttribute('open');
+}
+
 function toggleThemeSettingsMenu() {
   document.querySelector('dialog#settings-menu').toggleAttribute('open');
 }
@@ -199,6 +208,7 @@ function initializeColorThemeListeners() {
 
   themeSwitcherToggleEl.addEventListener('change', syncThemeOnToggle);
   themeSettingsBtnEl.addEventListener('click', toggleThemeSettingsMenu);
+  document.addEventListener('click', closeThemeSettingsMenuOnClickOutside);
   themeSwitcherDropdownEl.addEventListener('change', syncCustomThemeFromDropdown);
   themeInputsWrapperEl.addEventListener('input', updateCustomThemeOnChange);
   discardCustomThemeButtonEl.addEventListener('click', deleteCurrentCustomTheme);
