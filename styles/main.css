@@ -2,14 +2,14 @@
 
 @font-face {
   font-family: Roboto;
-  src: url(../assets/fonts/Roboto-Regular.ttf) format('truetype');
+  src: url(../assets/fonts/Roboto-Regular.ttf) format("truetype");
   font-weight: normal;
   font-display: auto;
 }
 
 @font-face {
   font-family: Roboto;
-  src: url(../assets/fonts/Roboto-Medium.ttf) format('truetype');
+  src: url(../assets/fonts/Roboto-Medium.ttf) format("truetype");
   font-weight: bold;
   font-display: auto;
 }
@@ -37,7 +37,8 @@ body {
 .main__left {
   width: 10rem;
   white-space: nowrap;
-  transition: 150ms width ease-in-out, 150ms padding-left ease-in-out, 150ms padding-right ease-in-out;
+  transition: 150ms width ease-in-out, 150ms padding-left ease-in-out,
+    150ms padding-right ease-in-out;
 }
 
 .main__right {
@@ -136,7 +137,8 @@ body {
   width: min(100%, max(calc(100% - 25rem), 30rem));
 }
 
-.header__logo img, .header__logo svg {
+.header__logo img,
+.header__logo svg {
   height: 2.5rem;
   width: auto;
   margin-right: 0.2rem;
@@ -289,8 +291,12 @@ input[disabled] {
 }
 
 @keyframes animated-gradient {
-  0% { background-position: 100% 0%; }
-  100% { background-position: 0% 0%; }
+  0% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
 /* Responsive Layout */
@@ -324,8 +330,10 @@ input[disabled] {
     margin-left: 0.5rem;
   }
 
-  .header__logo:has(+ .header__search .search__input:is(:focus, :not(:placeholder-shown))) {
-    display: none
+  .header__logo:has(
+      + .header__search .search__input:is(:focus, :not(:placeholder-shown))
+    ) {
+    display: none;
   }
 
   .header__search {
